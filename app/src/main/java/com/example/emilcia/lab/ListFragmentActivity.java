@@ -3,6 +3,7 @@ package com.example.emilcia.lab;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 
 public class ListFragmentActivity extends FragmentActivity
@@ -27,25 +28,18 @@ public class ListFragmentActivity extends FragmentActivity
             }
         }
 
-    public void onArticleSelected(int position) {
-
+    public void onArticleSelected(String date) {
+        Log.d("a", "onArticleSelected: ------------------------------------------------------------------------------"+date);
         if (getResources().getConfiguration().orientation == 2) {
 
             MyWebViewFragment webViewFragment = (MyWebViewFragment) getSupportFragmentManager().findFragmentById(R.id.webviewfragment);
-//            try {
-//
-//                WebView webView = webViewFragment.getWebView();
-//                webView.getSettings().setJavaScriptEnabled(true);
-//                webView.loadUrl(Consts.WEB_ADDRESS[position]);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            MyWebViewFragment.setLocation(name);
-//            MyWebViewFragment.displayLocation();
+            webViewFragment.setHistory(date);
+            webViewFragment.display();
+
         } else {
             MyWebViewFragment newFragment = new MyWebViewFragment();
             Bundle args = new Bundle();
-            args.putString(MyWebViewFragment.ARG_POSITION, Consts.WEB_ADDRESS[position]);
+            args.putString(getString(R.string.date_string), date);
             newFragment.setArguments(args);
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -12,6 +12,7 @@
     <string name="name_string">name</string>
     <string name="liters_string">liters</string>
     <string name="price_string">price</string>
+    <string name="date_string">date_string</string>
     <string name="add_price_hint">Wpisz koszt</string>
     <string name="maps_activity_search_text_hint">Wpisz nazwę miejsca</string>
     <string name="save_button">Zapisz</string>

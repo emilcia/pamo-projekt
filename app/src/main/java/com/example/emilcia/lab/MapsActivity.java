@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -67,13 +68,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 if(currentSearchLocation!=null){
 
+                    Date date = new Date();
+                    String stringDate = DateFormat.getDateTimeInstance().format(date);
+
                 History history = new History();
                 history.setLatitude(currentSearchLocation.latitude);
                 history.setLongitude(currentSearchLocation.longitude);
                 history.setName(name);
                 history.setLiters(Double.parseDouble(liters));
                 history.setPrice(Double.parseDouble(price));
-                history.setDate(new Date());
+                history.setDate(stringDate);
 
                 db.insert(history);
                     startActivity(mainActivityIntent);

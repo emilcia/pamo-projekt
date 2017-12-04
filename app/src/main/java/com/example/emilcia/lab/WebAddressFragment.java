@@ -27,7 +27,7 @@ public class WebAddressFragment extends ListFragment {
     private List<String> dates;
 
     public interface OnWebAddressSelectedListener {
-        void onArticleSelected(int position);
+        void onArticleSelected(String date);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class WebAddressFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        mCallback.onArticleSelected(position);
+        mCallback.onArticleSelected(dates.get(position));
         getListView().setItemChecked(position, true);
     }
 }

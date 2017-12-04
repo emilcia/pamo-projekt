@@ -2,6 +2,7 @@ package com.example.emilcia.lab;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import database.DatabaseHelper;
+import entity.History;
+
 /**
  * Created by Emilcia on 11.11.2017.
  */
@@ -21,31 +25,44 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MyWebViewFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
+    private DatabaseHelper db;
     public static final String ARG_POSITION = "address_position";
     private View mView;
     private boolean mIsWebViewAvailable;
-    private TextView myWebViewActivityName;
+    private TextView myWebActivityName;
     private TextView myWebViewActivityDescription;
-
+    private History history;
     private String mUrl;
+
 
     public MyWebViewFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = new DatabaseHelper(getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.webview_fragment, container, false);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        myWebActivityName = (TextView) mView.findViewById(R.id.location_details_activity_name);
+
+        if(getArguments() != null) {
+            String date = getArguments().getString(getString(R.string.date_string));
+            Log.d("a", "onCreateView: --------------------------------------------------------------------------------"+date);
+            setHistory(date);
+        }
         return mView;
+    }
+    public void setHistory(String date) {
+        history = db.getByDate(date);
+        myWebActivityName.setText(history.getName());
     }
 
     @Override
@@ -53,9 +70,14 @@ public class MyWebViewFragment extends Fragment implements OnMapReadyCallback{
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        if(history != null) {
+            display();
+        }
+    }
+    public void display(){
+        LatLng locationCoords = new LatLng(history.getLatitude(), history.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(locationCoords).title(history.getName()));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationCoords, 10));
     }
 
 //    @Override

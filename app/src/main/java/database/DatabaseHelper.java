@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import entity.History;
@@ -69,6 +70,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         while(data.moveToNext()){
             history.add(data.getString(0));
+        }
+        data.close();
+
+        return history;
+    }
+    public History getByDate(String date){
+        SQLiteDatabase db = this.getReadableDatabase();
+        History history = null;
+
+        Cursor data = db.rawQuery("SELECT * FROM REFUEL_HISTORY WHERE DATE = \"" + date +"\"", null);
+        if (data.moveToFirst()) {
+            history = new History();
+            history.setName(data.getString(1));
+            history.setLiters(data.getDouble(4));
+            history.setPrice(data.getDouble(5));
+            history.setDate(data.getString(6));
+            history.setLatitude(data.getDouble(2));
+            history.setLongitude(data.getDouble(3));
         }
         data.close();
 
