@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.emilcia.lab.AddHistoryActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/title" android:layout_width="wrap_content"
+        android:textSize="30sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/add_name"
+        android:inputType="text"
+        android:layout_width="228dp"
+        android:layout_height="50dp"
+        android:hint="@string/add_name_hint"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/add_liters"
+        android:inputType="text"
+        android:layout_width="228dp"
+        android:layout_height="50dp"
+        android:hint="@string/add_liters_hint"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/add_name"
+        android:layout_alignStart="@+id/add_name" />
+
+    <EditText
+        android:id="@+id/add_price"
+        android:inputType="text"
+        android:layout_width="228dp"
+        android:layout_height="50dp"
+        android:hint="@string/add_price_hint"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/add_liters"
+        android:layout_alignStart="@+id/add_name" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_button"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/add_price"
+        android:layout_alignEnd="@+id/add_name" />
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Lab</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="maps_activity_search_button">Wyszukaj</string>
+    <string name="maps_activity_button">Dodaj miejsce</string>
+    <string name="add_button">Dodaj miejsce</string>
+    <string name="list_view">Pokaz historie</string>
+    <string name="add_history">Dodaj wpis</string>
+    <string name="title">Dodawanie wpisu</string>
+    <string name="add_name_hint">Wpisz nazwe</string>
+    <string name="add_liters_hint">Wpisz ile litrów</string>
+    <string name="name_string">name</string>
+    <string name="liters_string">liters</string>
+    <string name="price_string">price</string>
+    <string name="add_price_hint">Wpisz koszt</string>
+    <string name="maps_activity_search_text_hint">Wpisz nazwę miejsca</string>
+    <string name="save_button">Zapisz</string>
+</resources>
