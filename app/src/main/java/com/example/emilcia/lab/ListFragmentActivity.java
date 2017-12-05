@@ -29,7 +29,6 @@ public class ListFragmentActivity extends FragmentActivity
         }
 
     public void onArticleSelected(String date) {
-        Log.d("a", "onArticleSelected: ------------------------------------------------------------------------------"+date);
         if (getResources().getConfiguration().orientation == 2) {
 
             MyWebViewFragment webViewFragment = (MyWebViewFragment) getSupportFragmentManager().findFragmentById(R.id.webviewfragment);

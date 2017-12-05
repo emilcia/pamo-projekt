@@ -7,11 +7,34 @@
     tools:context="com.example.emilcia.lab.MyWebViewFragment">
 
     <TextView
-        android:id="@+id/location_details_activity_name"
+        android:id="@+id/details_activity_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="ssssssss"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <TextView
+        android:id="@+id/details_activity_liters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <TextView
+        android:id="@+id/details_activity_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="157dp" />
+
+    <TextView
+        android:id="@+id/details_activity_price_liter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
         tools:layout_editor_absoluteX="143dp"
         tools:layout_editor_absoluteY="157dp" />
 

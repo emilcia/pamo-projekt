@@ -2,7 +2,6 @@ package com.example.emilcia.lab;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +25,15 @@ public class MyWebViewFragment extends Fragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
     private DatabaseHelper db;
-    public static final String ARG_POSITION = "address_position";
     private View mView;
-    private boolean mIsWebViewAvailable;
     private TextView myWebActivityName;
-    private TextView myWebViewActivityDescription;
+    private TextView myWebActivityLiters;
+    private TextView myWebActivityPrice;
+    private TextView myWebActivityPriceLiter;
     private History history;
-    private String mUrl;
-
+    private String liters;
+    private String price;
+    private String pricePerLiter;
 
     public MyWebViewFragment() {}
 
@@ -51,18 +51,28 @@ public class MyWebViewFragment extends Fragment implements OnMapReadyCallback{
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        myWebActivityName = (TextView) mView.findViewById(R.id.location_details_activity_name);
+        myWebActivityName = (TextView) mView.findViewById(R.id.details_activity_name);
+        myWebActivityLiters = (TextView) mView.findViewById(R.id.details_activity_liters);
+        myWebActivityPrice = (TextView) mView.findViewById(R.id.details_activity_price);
+        myWebActivityPriceLiter = (TextView) mView.findViewById(R.id.details_activity_price_liter);
 
         if(getArguments() != null) {
             String date = getArguments().getString(getString(R.string.date_string));
-            Log.d("a", "onCreateView: --------------------------------------------------------------------------------"+date);
             setHistory(date);
         }
         return mView;
     }
     public void setHistory(String date) {
         history = db.getByDate(date);
-        myWebActivityName.setText(history.getName());
+        myWebActivityName.setText("station name:"+history.getName());
+        Double x = history.getLiters()*history.getPrice();
+        liters = Double.toString(history.getLiters());
+        myWebActivityLiters.setText("liters:"+liters);
+        price = Double.toString(x);
+        myWebActivityPrice.setText("price:"+price+" zł");
+        pricePerLiter = Double.toString(history.getPrice());
+        myWebActivityPriceLiter.setText("price per liter: "+pricePerLiter);
+
     }
 
     @Override
@@ -79,86 +89,4 @@ public class MyWebViewFragment extends Fragment implements OnMapReadyCallback{
         mMap.addMarker(new MarkerOptions().position(locationCoords).title(history.getName()));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationCoords, 10));
     }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//
-//        if (mWebView != null) {
-//            mWebView.destroy();
-//        }
-//
-//        if(getArguments()!=null){
-//            mUrl = getArguments().getString(ARG_POSITION);
-//        }
-//
-//        mWebView = new WebView(getActivity());
-//        mWebView.setOnKeyListener(new View.OnKeyListener(){
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-//                    mWebView.goBack();
-//                    return true;
-//                }
-//                return false;
-//            }
-//
-//        });
-//        mWebView.setWebViewClient(new InnerWebViewClient());
-//        mIsWebViewAvailable = true;
-//        WebSettings settings = mWebView.getSettings();
-//        settings.setJavaScriptEnabled(true);
-//        if (mUrl != null) {
-//            loadUrl(mUrl);
-//        }
-//        return mWebView;
-//    }
-//
-//    public void loadUrl(String url) {
-//        if (mIsWebViewAvailable) {
-//            getWebView().loadUrl(url);
-//        }
-//    }
-
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        mWebView.onPause();
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        mWebView.onResume();
-//        super.onResume();
-//    }
-//
-//    @Override
-//    public void onDestroyView() {
-//        mIsWebViewAvailable = false;
-//        super.onDestroyView();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        if (mWebView != null) {
-//            mWebView.destroy();
-//            mWebView = null;
-//        }
-//        super.onDestroy();
-//    }
-//
-//    public WebView getWebView() {
-//        return mIsWebViewAvailable ? mWebView : null;
-//    }
-//
-//
-//    private class InnerWebViewClient extends WebViewClient {
-//        @Override
-//        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//            view.loadUrl(url);
-//            return true;
-//        }
-//
-//
-//    }
 }

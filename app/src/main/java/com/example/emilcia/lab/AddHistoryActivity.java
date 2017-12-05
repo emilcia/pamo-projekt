@@ -3,14 +3,9 @@ package com.example.emilcia.lab;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import database.DatabaseHelper;
-import entity.History;
 
 
 public class AddHistoryActivity extends AppCompatActivity {
@@ -27,10 +22,6 @@ public class AddHistoryActivity extends AppCompatActivity {
         final Button addLocationActivitySaveButton = (Button) findViewById(R.id.save_button);
 
         final Intent mapActivityIntent = new Intent(this, MapsActivity.class);
-
-        Log.d("", "onCreate: -----------------------------------------------------------------------------------------------------"+addName.getText().toString());
-        Log.d("", "onCreate: -----------------------------------------------------------------------------------------------------"+addLiters.getText().toString());
-        Log.d("", "onCreate: -----------------------------------------------------------------------------------------------------"+addPrice.getText().toString());
 
         addLocationActivitySaveButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,9 +30,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private DatabaseHelper db;
     private LatLng currentSearchLocation;
-    public static final String LATITUDE_STRING = "latitude";
-    public static final String LONGITUDE_STRING = "longitude";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
